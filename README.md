@@ -1,5 +1,8 @@
 # Forbidden-Memories-Lockout
 A new Vs Race mode for Yugioh Forbidden Memories
+Cards you win against a Duelist are locked out from your opponents. This only applies to getting said Card on the Duelist and Rank Bracket you won it on. The Rank Brackets are the standard `S/A POW`, `BCD POW/TEC` and `S/A TEC`.
+> For example: You win Spike Seadra on Isis S/A POW. Your opponent(s) cannot win Spike Seadra from Isis S/A POW. Your opponent(s) CAN win Spike Seadra from Isis on BCD POW/TEC and S/A TEC as well as on all ranks for Kaiba.
+> > The exception to this rule is Megamorph. There are only 3 Megamorphs to be won regardless of where you win it. This can split between you and your opponents in any way, but at most 3 copies of Megamorph will exist in the match. This is to balance out that the only feasible way to obtain megamorph is through S/A TEC Pegasus. This way if your opponent gets a megamorph early, it doesn't mean you are locked out from the most powerful card in the game immediately.
 
 This currently only works for the Bizhawk emulator. Known working on Bizhawk 2.6.2. There may be future support for more emulators and/or changing over to a standalone program.
 
@@ -19,7 +22,7 @@ The locations of files is very important! Make sure to put them in the right pla
 First, in luasocket (3), you should find three folders, a file, and an executable: `lua/`, `mime/`, `socket/`, `lua5.1.dll`, and `lua5.1.exe`.
 Place the folders `mime/` and `socket/` in `BizHawkRoot/`, and place the *contents* of `lua/` in `BizHawkRoot/Lua/`. Place `lua5.1.dll` in `BizHawkRoot/dll/`. You do not need `lua5.1.exe`.
 
-I would suggest then placing the `FM_Lockout.lua` and `dropInfo.txt` into `BizHawkRoot/`. Then finally placing `json.lua` in `BizHawkRoot/Lua`.
+I would suggest placing the `FM_Lockout.lua` and `dropInfo.txt` from FM Lockout (4) into `BizHawkRoot/`. Then finally placing `json.lua` in `BizHawkRoot/Lua`.
 
 This should complete the file placement.
 
