@@ -50,6 +50,14 @@ Everybody inputs the Port number, but ONLY the Host needs to do portforwarding. 
 ### Load Data?
 This button should ONLY be used if you crashed for whatever reason. This will recover your opponent's card lockout data as well as your own.
 
+## Lockout Data Window
+
+This window is your means of telling what cards your opponent(s) have locked you out of on Duelists and their respective Rank Brackets. The order by which the cards are displayed are made to reflect their order on the [Pocket Duelist](https://pd.ygo.fm/) website. Using the website and tool together will help you route your way around your opponent. At the bottom of the window it also displays the Duelist your opponent beat last.
+
+If you do not wish to use this tool, you are not forced to. Closing it will not effect anything, but to get it back you have to restart the entire script, which means closing out of the Lua Console entirely.
+
+I would suggest right clicking the big empty box inside this window and enabling `Right to left Reading order`. This makes the info much easier to read.
+
 ## Worthwhile notes
 
 1. If for whatever reason you need to close the room and reopen a new one, you should do so by closing out of the Lua Console entirely and continuing from there.
