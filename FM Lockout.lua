@@ -1467,6 +1467,7 @@ while true do
             duelCompleted = false
         end
     end
+    MMCount = PlayerMMCount + OpponentMMCount
     --need this or emu crashes since it can't advance in a while loop
     emu.frameadvance()
 end
