@@ -1350,7 +1350,7 @@ function leaveRoom()
     end
 end
 
-mainform = forms.newform(310, 280, "FM Lockout")
+mainform = forms.newform(310, 280, "FM Lockout v1.02")
 
 subform = forms.newform(520, 640, "Lockout Data")
 
