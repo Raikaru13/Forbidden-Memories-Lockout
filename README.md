@@ -60,7 +60,7 @@ I would suggest right clicking the big empty box inside this window and enabling
 
 ## Worthwhile notes
 
-1. If for whatever reason you need to close the room and reopen a new one, you should do so by closing out of the Lua Console entirely and continuing from there.
+1. If for whatever reason you need to close the room and reopen a new one, all players should do so by closing out of the Lua Console entirely and continuing from there.
 
 2. Do not win a duel with Sword of Revealing Light in play. This should be a rare enough occurance that you will never run into it, but should you then the results screen will be messed up and I cannot guarantee your cards will lockout correctly.
 > This is due to the way the rewards are colored on the results screen and should you find yourself in this situation, spamming X till you clear out of the results screen should eventually get you out. 
