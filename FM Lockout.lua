@@ -9,6 +9,7 @@ duelCompleted = false
 PlayerMMCount = 0
 OpponentMMCount = 0
 maxCard = 0
+connectionTest = 0
 
 Inputs = joypad.get(1)
 
@@ -1233,6 +1234,7 @@ function Hosting()
         clients[totalclient] = client
         clientnames[totalclient] = clientname
         printOutput(">> " .. clientname .. " connected!", text1)
+        clients[totalclient]:send(tostring("Sys: " .. "Connected!" .. "\n"))
     end
 
     -- loop through the client table
@@ -1269,6 +1271,18 @@ function Listen()
     tcp:settimeout(0)
     local opponentMessage, err = tcp:receive()
     if (err == nil and opponentMessage ~= nil) then
+        if string.sub(opponentMessage, 1, 5) == "Sys: " then
+            printOutput(string.sub(opponentMessage, 6), text1)
+        elseif string.sub(opponentMessage, 1, 6) == "Data: " then
+            printOutput("Snycing Opponent Lockouts...", text1)
+            DuelistOpponent = json.decode(string.sub(opponentMessage, 7))
+            local test = assert(io.open("duelistOpponent.txt"))
+            test:write(string.sub(opponentMessage, 7))
+            test:close()
+        elseif opponentMessage == "Connection Test... " then
+            printOutput("Test Successful!" .." at " ..os.date("%H:%M:%S"), text1)
+            tcp:send("Sys: " .. username .. " Connection Test Successful!" .." at " ..os.date("%H:%M:%S") .. "\n")
+        else
         lockedCards = json.decode(opponentMessage)
         lockedCardCount = #lockedCards - 2
         opponentDueilst = #lockedCards - 1
@@ -1296,6 +1310,7 @@ function Listen()
         printOutput("----------------", text1)
     end
 end
+end
 
 function Join()
     joiningPort = forms.gettext(txtPort)
@@ -1311,18 +1326,19 @@ function loadData()
     printOutput("Loading Data from duelistPlayer.txt", text1)
     local test = assert(io.open("duelistPlayer.txt"))
     LoadData = test:read("*a")
-    print(LoadData)
-    print("Junk")
     DuelistPlayer = json.decode(LoadData)
     test:close()
+    printOutput("Sending Lockout Data to Opponent!", text1)
+    tcp:send("Data: " .. LoadData .. "\n")
     printOutput("Loading Data from duelistOpponent.txt", text1)
     local test2 = assert(io.open("duelistOpponent.txt"))
     LoadData = test2:read("*a")
-    print(LoadData)
     DuelistOpponent = json.decode(LoadData)
     test2:close()
     PlayerMMCount = DuelistPlayer[40]
     OpponentMMCount = DuelistOpponent[40]
+    printOutput("Player MM Count: " .. PlayerMMCount, text1)
+    printOutput("Opponent MM Count: " .. OpponentMMCount, text1)
 end
 
 --Quit/Disconnect click handle for the quit button
@@ -1419,6 +1435,7 @@ checkSum()
 
 --Main Loop
 while true do
+
     --End script if form is closed
     if forms.gettext(mainform) == "" then
         leaveRoom()
@@ -1427,10 +1444,16 @@ while true do
     end
 
     if isHosting == true then
+        connectionTest = connectionTest + 1
+        if connectionTest >= 6000 then
+            connectionTest = 0
+            printOutput("Testing Connection...", text1)
+            tcp:send("Connection Test... " .. "\n")
+        end
         Hosting()
     end
 
-    if isConnected == true and isHosting ~= true then
+    if isConnected == true and isHosting ~= true then    
         Listen()
         lockout()
     end
